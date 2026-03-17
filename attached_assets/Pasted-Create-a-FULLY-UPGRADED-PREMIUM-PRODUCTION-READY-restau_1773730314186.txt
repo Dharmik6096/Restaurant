@@ -1,0 +1,278 @@
+Create a FULLY UPGRADED, PREMIUM, PRODUCTION-READY restaurant website for:
+
+Restaurant Name: Kalapi Restaurant
+Type: Luxury Vegetarian Fine Dining Restaurant in Ahmedabad
+
+---
+
+🎯 OBJECTIVE:
+
+Redesign the entire website into a **modern EARTHY PREMIUM restaurant experience**
+that feels natural, elegant, and high-end — NOT a template.
+
+The UI/UX must match:
+
+* Premium fine-dining brands
+* Modern organic luxury design trends
+* Smooth, app-like experience (Swiggy/Zomato level)
+
+---
+
+# 🎨 DESIGN SYSTEM (EARTHY PREMIUM THEME)
+
+🚫 DO NOT use black + gold theme
+
+✅ Use EARTHY LUXURY palette:
+
+* Primary: Deep Forest Green (#0F2A1D)
+* Secondary: Warm Beige (#F5E9DA)
+* Accent: Terracotta (#C56A3D)
+* Highlight: Soft Gold (#D6B98C)
+* Background: Off-white / Cream
+
+---
+
+🌿 DESIGN STYLE:
+
+* Organic + natural textures
+* Minimal luxury aesthetic
+* Soft shadows (not heavy)
+* Rounded corners (modern feel)
+* Elegant serif + clean sans-serif typography
+
+---
+
+✨ UI FEEL:
+
+* Calm, premium, welcoming
+* Inspired by:
+
+  * Organic cafes
+  * Luxury vegetarian restaurants
+  * Nature-themed dining brands
+
+---
+
+# 🔥 CRITICAL FIXES (KEEP ALL FUNCTIONALITY)
+
+(Keep ALL your existing fixes — but apply new theme)
+
+---
+
+## 🏠 HOME PAGE (FULL EARTHY REDESIGN)
+
+1. HERO SECTION:
+
+* Full-width background VIDEO (restaurant ambience / food)
+
+* Overlay: soft gradient (green → transparent)
+
+* Heading:
+  "A Royal Vegetarian Dining Experience in Ahmedabad"
+
+* Buttons:
+  [View Menu] (terracotta button)
+  [Book a Table] (outlined earthy style)
+
+---
+
+2. NAVBAR:
+
+* Sticky + blur effect
+* Transparent → solid on scroll
+* Minimal logo (earthy tone)
+
+---
+
+3. SECTIONS:
+
+🌿 Featured Dishes:
+
+* Card UI with soft shadow
+* Hover: scale + slight glow
+
+🌿 Why Choose Us:
+
+* Icons + short text
+* Focus:
+
+  * Organic ingredients
+  * Premium experience
+  * Fusion cuisine
+
+🌿 Reviews:
+
+* Clean card UI
+* Beige background
+* Star ratings
+
+🌿 Popular Times:
+
+* Soft graph UI (not harsh colors)
+
+---
+
+## 📜 MENU PAGE (EARTHY UI + FIXES)
+
+* Card design:
+
+  * Light background
+  * Soft shadow
+  * Rounded edges
+
+* Add:
+
+  * Veg badge 🌱 (green tone)
+  * Favorite ❤️ (animated)
+
+* Buttons:
+
+  * Add to Cart → Terracotta color
+  * Hover → darker shade
+
+* FIX:
+
+  * Add to Cart working
+  * Cart state updates
+  * Toast notifications
+
+* Add:
+
+  * Live search
+  * Category filter
+
+---
+
+## 🛒 CART + CHECKOUT (MODERN UX)
+
+* Slide-in cart drawer
+* Clean layout (beige background)
+
+Checkout:
+
+* Multi-step feel:
+
+  1. Address
+  2. Summary
+  3. Payment
+
+* Buttons:
+
+  * Earthy gradient style
+
+---
+
+## 💳 PAYMENT
+
+* Razorpay integration (or mock)
+
+After payment:
+
+* Show success UI with:
+
+  * Green success icon
+  * Order summary
+
+---
+
+## 👨‍🍳 ABOUT PAGE (STORYTELLING STYLE)
+
+* Use storytelling layout:
+
+  * Large images
+  * Text blocks
+
+Sections:
+
+* Our Story
+* Our Philosophy (organic, quality)
+* Dining Experience
+
+Add:
+[Book a Table] CTA
+
+---
+
+## 📞 CONTACT PAGE
+
+* Add Google Map embed (Ahmedabad location)
+* Beige card background
+
+Buttons:
+
+* Call Now (green button)
+* Get Directions
+
+---
+
+## 🔻 FOOTER
+
+* Minimal design
+* Beige or dark green background
+
+Keep only:
+
+* Address
+* Phone
+* Social icons
+
+---
+
+# ✨ ANIMATIONS
+
+* Smooth scroll (Framer Motion)
+* Fade-in sections
+* Hover lift effects
+* Button ripple effect
+
+---
+
+# ⚙️ FUNCTIONAL REQUIREMENTS
+
+ALL features MUST WORK:
+
+* Add to Cart → updates cart
+* Favorite ❤️ → saves data
+* Checkout → saves order
+* Payment → updates status
+* Contact form → stores data
+
+---
+
+# 📱 RESPONSIVENESS
+
+* Mobile-first
+* Tablet optimized
+* Smooth UI across all devices
+
+---
+
+# 🎯 FINAL OUTPUT:
+
+Generate:
+
+1. React + Tailwind frontend
+2. Earthy premium UI system
+3. Working cart + payment
+4. Real food images (Gujarati dishes)
+5. Google Maps embed
+6. Clean About + Contact pages
+7. Smooth animations
+
+---
+
+# 🌿 FINAL GOAL:
+
+Create a website that feels like:
+
+👉 A luxury organic vegetarian restaurant
+👉 Calm, premium, and modern
+👉 Unique (NOT typical black-gold theme)
+
+---
+
+⚡ IMPORTANT:
+
+* Avoid template look completely
+* Focus on spacing, typography, and subtle elegance
+* Prioritize UX + real functionality

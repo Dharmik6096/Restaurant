@@ -1,40 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: 'Cinzel', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
 
-  --color-background: hsl(0 0% 3%);
-  --color-foreground: hsl(40 30% 90%);
+  --color-background: hsl(38 33% 96%);
+  --color-foreground: hsl(151 47% 11%);
   
-  --color-primary: hsl(46 65% 52%);
-  --color-primary-foreground: hsl(0 0% 5%);
+  --color-primary: hsl(20 53% 51%);
+  --color-primary-foreground: hsl(0 0% 100%);
   
-  --color-secondary: hsl(0 0% 12%);
-  --color-secondary-foreground: hsl(40 30% 90%);
+  --color-secondary: hsl(33 49% 91%);
+  --color-secondary-foreground: hsl(151 47% 11%);
   
-  --color-muted: hsl(0 0% 9%);
-  --color-muted-foreground: hsl(40 10% 60%);
+  --color-muted: hsl(38 41% 89%);
+  --color-muted-foreground: hsl(151 47% 35%);
   
-  --color-accent: hsl(46 65% 52% / 0.15);
-  --color-accent-foreground: hsl(46 65% 52%);
+  --color-accent: hsl(36 46% 69%);
+  --color-accent-foreground: hsl(151 47% 11%);
   
   --color-destructive: hsl(0 84% 60%);
   --color-destructive-foreground: hsl(0 0% 100%);
   
-  --color-border: hsl(46 65% 52% / 0.15);
-  --color-ring: hsl(46 65% 52% / 0.4);
+  --color-border: rgba(15, 42, 29, 0.12);
+  --color-ring: hsl(20 53% 51% / 0.4);
   
-  --color-card: hsl(0 0% 6%);
-  --color-card-foreground: hsl(40 30% 90%);
+  --color-card: hsl(33 49% 91%);
+  --color-card-foreground: hsl(151 47% 11%);
 }
 
 @layer base {
   :root {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    color-scheme: dark;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* Force light mode since theme is explicitly light background */
+  .dark {
+    --color-background: hsl(151 47% 11%);
+    --color-foreground: hsl(33 49% 91%);
+    --color-card: hsl(151 47% 13%);
+    --color-card-foreground: hsl(33 49% 91%);
+    --color-muted: hsl(151 47% 18%);
+    --color-muted-foreground: hsl(33 49% 70%);
+    --color-border: rgba(245, 233, 218, 0.12);
   }
 
   body {
@@ -47,27 +71,12 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-[#0a0a0a]/70 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-black/50;
+  .soft-shadow {
+    @apply shadow-[0_8px_30px_rgba(15,42,29,0.06)];
   }
   
-  .glass-panel {
-    @apply bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-md border border-white/[0.05] shadow-xl;
-  }
-
-  .text-gold-gradient {
-    background: linear-gradient(135deg, #D4AF37 0%, #FFF2CD 50%, #AA7700 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .bg-gold-gradient {
-    background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
-  }
-  
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:border-primary/50;
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(15,42,29,0.1)];
   }
 }
 
@@ -77,12 +86,12 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(0 0% 3%);
+  background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(0 0% 20%);
+  background: var(--color-muted-foreground);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(46 65% 52% / 0.5);
+  background: var(--color-primary);
 }

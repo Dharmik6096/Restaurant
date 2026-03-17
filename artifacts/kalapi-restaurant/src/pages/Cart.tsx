@@ -47,11 +47,11 @@ export default function Cart() {
 
   if (!isAuthenticated) {
     return (
-      <div className="pt-32 pb-24 min-h-[70vh] flex flex-col items-center justify-center text-center px-4">
-        <ShoppingBag className="w-16 h-16 text-primary/50 mb-6" />
-        <h2 className="font-display text-3xl mb-4 text-foreground">Sign In to View Cart</h2>
-        <p className="text-muted-foreground mb-8 max-w-md">You need to be logged in to manage your order and proceed to checkout.</p>
-        <Link href="/login" className="px-8 py-3 bg-primary text-primary-foreground rounded-sm font-semibold uppercase tracking-wider">
+      <div className="pt-40 pb-32 min-h-[80vh] flex flex-col items-center justify-center text-center px-4 bg-background">
+        <ShoppingBag className="w-20 h-20 text-muted-foreground/50 mb-8" />
+        <h2 className="font-display text-4xl mb-6 text-foreground">Sign In to View Cart</h2>
+        <p className="text-muted-foreground text-lg mb-10 max-w-md leading-relaxed">You need to be logged in to manage your order and proceed to checkout.</p>
+        <Link href="/login" className="px-10 py-4 bg-primary text-primary-foreground rounded-lg font-semibold uppercase tracking-wider shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
           Sign In Now
         </Link>
       </div>
@@ -63,60 +63,60 @@ export default function Cart() {
   const total = subtotal + tax;
 
   return (
-    <div className="pt-32 pb-24 min-h-[80vh]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="font-display text-4xl text-gold-gradient mb-10">Your Order</h1>
+    <div className="pt-40 pb-32 min-h-screen bg-background">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="font-display text-5xl text-foreground mb-12">Your Order</h1>
 
         {isLoading ? (
-          <div className="animate-pulse space-y-4">
-            <div className="h-24 bg-white/5 rounded-xl"></div>
-            <div className="h-24 bg-white/5 rounded-xl"></div>
+          <div className="animate-pulse space-y-6">
+            <div className="h-32 bg-card rounded-xl"></div>
+            <div className="h-32 bg-card rounded-xl"></div>
           </div>
         ) : !cartItems || cartItems.length === 0 ? (
-          <div className="glass-panel rounded-xl p-12 text-center">
-            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="bg-card rounded-2xl p-16 text-center soft-shadow">
+            <div className="w-24 h-24 bg-background rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
               <ShoppingBag className="w-10 h-10 text-primary" />
             </div>
-            <h3 className="text-2xl font-display mb-4">Your cart is empty</h3>
-            <p className="text-muted-foreground mb-8">Looks like you haven't added any dishes yet.</p>
-            <Link href="/menu" className="px-8 py-3 border border-primary text-primary rounded-sm font-semibold uppercase tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
+            <h3 className="text-3xl font-display mb-4 text-foreground">Your cart is empty</h3>
+            <p className="text-muted-foreground text-lg mb-10">Looks like you haven't added any dishes yet.</p>
+            <Link href="/menu" className="px-10 py-4 bg-primary text-primary-foreground rounded-lg font-semibold uppercase tracking-wider hover:bg-[#A8522E] transition-colors inline-block shadow-md">
               Browse Menu
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <div className="lg:col-span-2 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2 space-y-6">
               {cartItems.map((item, i) => (
                 <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   key={item.id} 
-                  className="glass-panel p-4 rounded-xl flex gap-4 items-center"
+                  className="bg-card p-5 rounded-2xl flex gap-6 items-center soft-shadow"
                 >
                   <img 
                     src={item.menuItem?.image || `${import.meta.env.BASE_URL}images/dish-pasta.png`} 
                     alt={item.menuItem?.name} 
-                    className="w-20 h-20 object-cover rounded-md"
+                    className="w-28 h-28 object-cover rounded-xl shadow-sm"
                   />
                   <div className="flex-1">
-                    <h4 className="font-bold text-lg">{item.menuItem?.name}</h4>
-                    <p className="text-primary font-medium">₹{item.menuItem?.price}</p>
+                    <h4 className="font-display font-bold text-2xl text-foreground mb-1">{item.menuItem?.name}</h4>
+                    <p className="text-primary font-bold text-lg">₹{item.menuItem?.price}</p>
                   </div>
                   
-                  <div className="flex items-center gap-3 bg-black/50 border border-white/10 rounded-full px-3 py-1">
+                  <div className="flex items-center gap-4 bg-background rounded-full px-2 py-1.5 shadow-inner">
                     <button 
                       onClick={() => handleUpdateQuantity(item.menuItemId, item.quantity - 1)}
                       disabled={updatingId === item.menuItemId || item.quantity <= 1}
-                      className="text-muted-foreground hover:text-primary disabled:opacity-50"
+                      className="w-8 h-8 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors disabled:opacity-50"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
-                    <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
+                    <span className="w-6 text-center text-lg font-bold">{item.quantity}</span>
                     <button 
                       onClick={() => handleUpdateQuantity(item.menuItemId, item.quantity + 1)}
                       disabled={updatingId === item.menuItemId}
-                      className="text-muted-foreground hover:text-primary disabled:opacity-50"
+                      className="w-8 h-8 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors disabled:opacity-50"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -125,35 +125,35 @@ export default function Cart() {
                   <button 
                     onClick={() => handleRemove(item.menuItemId)}
                     disabled={removeMutation.isPending}
-                    className="p-2 text-muted-foreground hover:text-destructive transition-colors ml-2"
+                    className="p-3 text-muted-foreground hover:bg-red-50 hover:text-destructive rounded-full transition-colors ml-2"
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="w-6 h-6" />
                   </button>
                 </motion.div>
               ))}
             </div>
 
             <div className="lg:col-span-1">
-              <div className="glass-panel p-6 rounded-xl sticky top-32">
-                <h3 className="font-display text-xl mb-6 border-b border-white/10 pb-4">Order Summary</h3>
+              <div className="bg-[#0F2A1D] text-[#F5E9DA] p-8 rounded-2xl sticky top-32 shadow-xl">
+                <h3 className="font-display text-2xl mb-8 border-b border-[#F5E9DA]/10 pb-6">Order Summary</h3>
                 
-                <div className="space-y-4 text-sm mb-6">
-                  <div className="flex justify-between text-muted-foreground">
+                <div className="space-y-5 text-base mb-8">
+                  <div className="flex justify-between text-[#F5E9DA]/80">
                     <span>Subtotal</span>
-                    <span>₹{subtotal.toFixed(2)}</span>
+                    <span className="font-medium text-[#F5E9DA]">₹{subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-muted-foreground">
+                  <div className="flex justify-between text-[#F5E9DA]/80">
                     <span>Taxes (5% GST)</span>
-                    <span>₹{tax.toFixed(2)}</span>
+                    <span className="font-medium text-[#F5E9DA]">₹{tax.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-lg font-bold text-foreground border-t border-white/10 pt-4">
+                  <div className="flex justify-between text-2xl font-display font-bold border-t border-[#F5E9DA]/10 pt-6 mt-6">
                     <span>Total</span>
                     <span className="text-primary">₹{total.toFixed(2)}</span>
                   </div>
                 </div>
 
                 <Link href="/checkout">
-                  <button className="w-full py-4 bg-gold-gradient text-primary-foreground rounded-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all">
+                  <button className="w-full py-4 bg-primary text-primary-foreground rounded-lg font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#A8522E] transition-all shadow-lg hover:-translate-y-1">
                     Proceed to Checkout <ArrowRight className="w-5 h-5" />
                   </button>
                 </Link>

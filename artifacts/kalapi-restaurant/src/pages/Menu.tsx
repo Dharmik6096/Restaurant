@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useGetMenu } from "@workspace/api-client-react";
 import { MenuItemCard } from "@/components/MenuItemCard";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 import { motion } from "framer-motion";
 
 const CATEGORIES = ["All", "Starters", "Soups", "Main Course", "Pizza & Pasta", "Rice & Dal", "Breads", "Desserts", "Beverages"];
@@ -27,8 +27,6 @@ export default function Menu() {
     }
   });
 
-  // Since the hook config above might misalign with the openapi spec strictly depending on how Orval types it,
-  // I will do client-side filtering as a bulletproof fallback if the API doesn't filter perfectly.
   const filteredItems = menuItems?.filter(item => {
     const matchCat = activeCategory === "All" || item.category === activeCategory;
     const matchSearch = item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) || 
@@ -37,27 +35,31 @@ export default function Menu() {
   }) || [];
 
   return (
-    <div className="pt-32 pb-24 min-h-screen">
+    <div className="pt-40 pb-32 min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-12">
-          <h1 className="font-display text-4xl md:text-5xl text-gold-gradient mb-4">Our Menu</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover our carefully curated selection of royal vegetarian delicacies, prepared with the finest ingredients and boundless passion.
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <h1 className="font-display text-5xl md:text-6xl text-foreground mb-6">Our Menu</h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+            Discover our carefully curated selection of royal vegetarian delicacies, prepared with organic ingredients and boundless passion.
           </p>
-        </div>
+        </motion.div>
 
         {/* Filters & Search */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-          <div className="w-full md:w-auto overflow-x-auto pb-2 flex gap-2 hide-scrollbar">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
+          <div className="w-full md:w-auto overflow-x-auto pb-4 flex gap-3 hide-scrollbar">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`whitespace-nowrap px-5 py-2 rounded-full border text-sm font-medium transition-all ${
+                className={`whitespace-nowrap px-6 py-2.5 rounded-full border-2 text-sm font-semibold tracking-wide transition-all ${
                   activeCategory === cat 
-                    ? "bg-primary border-primary text-primary-foreground" 
-                    : "bg-transparent border-white/10 text-foreground hover:border-primary/50"
+                    ? "bg-primary border-primary text-primary-foreground shadow-md" 
+                    : "bg-transparent border-foreground text-foreground hover:bg-foreground/5"
                 }`}
               >
                 {cat}
@@ -65,36 +67,36 @@ export default function Menu() {
             ))}
           </div>
           
-          <div className="relative w-full md:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <div className="relative w-full md:w-80">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input 
               type="text" 
               placeholder="Search dishes..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
+              className="w-full bg-card border-none shadow-[0_4px_20px_rgba(15,42,29,0.05)] rounded-full py-3.5 pl-12 pr-6 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
             />
           </div>
         </div>
 
         {/* Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {[1,2,3,4,5,6,7,8].map(i => (
-              <div key={i} className="glass-panel h-80 rounded-xl animate-pulse"></div>
+              <div key={i} className="bg-card h-96 rounded-xl animate-pulse"></div>
             ))}
           </div>
         ) : error ? (
-          <div className="text-center py-20 text-destructive">
-            Failed to load menu. Please try again later.
+          <div className="text-center py-24 text-destructive bg-card rounded-xl soft-shadow">
+            <p className="text-lg font-medium">Failed to load menu. Please try again later.</p>
           </div>
         ) : filteredItems.length === 0 ? (
-          <div className="text-center py-20 glass-panel rounded-xl">
-            <h3 className="text-xl font-display text-primary mb-2">No dishes found</h3>
-            <p className="text-muted-foreground">Try adjusting your search or category filter.</p>
+          <div className="text-center py-24 bg-card rounded-xl soft-shadow">
+            <h3 className="text-2xl font-display text-foreground mb-3">No dishes found</h3>
+            <p className="text-muted-foreground text-lg">Try adjusting your search or category filter.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredItems.map((item, i) => (
               <MenuItemCard key={item.id} item={item} index={i} />
             ))}

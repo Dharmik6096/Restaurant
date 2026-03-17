@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useSignup } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 export default function Signup() {
   const [, setLocation] = useLocation();
@@ -32,53 +33,63 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 pt-20 bg-background relative overflow-hidden">
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div className="min-h-screen flex items-center justify-center px-4 pt-24 bg-background relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#0F2A1D]/5 blur-[120px]"></div>
+      </div>
       
-      <div className="glass-panel p-10 rounded-2xl w-full max-w-md relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-card p-12 rounded-[24px] w-full max-w-md relative z-10 soft-shadow border border-border"
+      >
         <div className="text-center mb-10">
-          <h1 className="font-display text-3xl text-gold-gradient mb-2">Join Kalapi</h1>
-          <p className="text-sm text-muted-foreground">Experience luxury vegetarian dining</p>
+          <h1 className="font-display text-4xl text-foreground mb-3">Join Kalapi</h1>
+          <p className="text-lg text-muted-foreground">Experience luxury vegetarian dining</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm text-muted-foreground mb-2">Full Name</label>
+            <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Full Name</label>
             <input 
               type="text" required
               value={name} onChange={e => setName(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary text-foreground"
+              className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
             />
           </div>
           <div>
-            <label className="block text-sm text-muted-foreground mb-2">Email Address</label>
+            <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Email Address</label>
             <input 
               type="email" required
               value={email} onChange={e => setEmail(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary text-foreground"
+              className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
             />
           </div>
           <div>
-            <label className="block text-sm text-muted-foreground mb-2">Password</label>
+            <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Password</label>
             <input 
               type="password" required minLength={6}
               value={password} onChange={e => setPassword(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary text-foreground"
+              className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
             />
           </div>
 
           <button 
             type="submit" disabled={signupMutation.isPending}
-            className="w-full py-3 bg-primary text-primary-foreground rounded-sm font-bold tracking-widest uppercase hover:bg-primary/90 transition-colors disabled:opacity-50 mt-6"
+            className="w-full py-4 bg-primary text-primary-foreground rounded-lg font-bold tracking-widest uppercase text-lg hover:bg-[#A8522E] shadow-lg hover:-translate-y-1 transition-all disabled:opacity-50 mt-8"
           >
             {signupMutation.isPending ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
-        <p className="text-center text-sm text-muted-foreground mt-8">
-          Already have an account? <Link href="/login" className="text-primary hover:underline">Sign in</Link>
-        </p>
-      </div>
+        <div className="mt-10 text-center border-t border-border pt-6">
+          <p className="text-base text-muted-foreground">
+            Already have an account? <Link href="/login" className="text-[#0F2A1D] font-bold hover:underline hover:text-primary transition-colors">Sign in</Link>
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 }

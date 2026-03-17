@@ -1,0 +1,263 @@
+Create a FULLY UPGRADED, PREMIUM, PRODUCTION-READY restaurant website for:
+
+Restaurant Name: Kalapi Restaurant
+Type: Luxury Vegetarian Fine Dining Restaurant in Ahmedabad
+
+---
+
+🎯 OBJECTIVE:
+
+Fix all existing issues and redesign the entire website to feel like:
+👉 A REAL premium vegetarian restaurant (not a template)
+
+The UI/UX must match:
+
+* Fine dining restaurant websites
+* Swiggy/Zomato level interaction
+* 🌿 EARTHY PREMIUM BRANDING (natural + elegant)
+
+---
+
+# 🎨 NEW DESIGN THEME (VERY IMPORTANT)
+
+Replace black + gold with:
+
+🌿 EARTHY PREMIUM COLOR PALETTE:
+
+* Primary: Deep Forest Green (#0F2A1D)
+* Secondary: Olive Green (#3E5F44)
+* Accent: Warm Beige (#F5E6D3)
+* Highlight: Soft Gold (#D4AF37)
+* Background: Off-white / Cream (#FAF9F6)
+
+---
+
+🎨 UI STYLE:
+
+* Nature-inspired luxury
+* Minimal + elegant
+* Soft shadows (not harsh)
+* Glassmorphism (light blur)
+* Organic shapes (rounded edges)
+* Premium typography (serif + modern mix)
+
+---
+
+# 🔥 CRITICAL FIXES (UPDATED WITH THEME)
+
+---
+
+## 🏠 HOME PAGE (COMPLETE REDESIGN REQUIRED)
+
+✅ REQUIRED:
+
+1. HERO SECTION:
+
+* Full-width **restaurant ambience video**
+
+* Overlay: dark green gradient
+
+* Heading:
+  "A Royal Vegetarian Dining Experience in Ahmedabad"
+
+* Buttons:
+  [View Menu]
+  [Order Now]
+  [Book a Table]
+
+2. NAVBAR:
+
+* Transparent → turns solid on scroll
+* Add blur effect
+* Include logo + Book Table CTA
+
+3. LOGO:
+
+* Minimal elegant logo
+* Use green + gold accent
+* Clean typography style
+
+4. ADD SECTIONS:
+
+🌿 Featured Dishes:
+
+* Card UI with hover zoom
+
+🌿 Why Choose Us:
+
+* Farm fresh ingredients
+* Pure veg excellence
+* Premium dining experience
+
+🌿 Reviews Section:
+
+* Rating 4.3 ⭐
+* Card UI with avatars
+
+🌿 Popular Times Graph:
+
+* Clean modern UI
+
+---
+
+## 📜 MENU PAGE (EARTHY UI + FUNCTION FIX)
+
+1. FIX ADD TO CART:
+
+* Fully working (state + backend)
+* Toast notification
+
+2. UI DESIGN:
+
+* Soft card background (cream)
+* Green accents
+* Rounded edges
+* Shadow + hover lift
+
+3. FOOD IMAGES:
+
+* Use REAL Gujarati restaurant images
+* Natural lighting (not AI-generated)
+
+4. ADD:
+
+* Veg badge 🌱
+* Favorite ❤️ button
+* Quantity selector
+
+5. SEARCH + FILTER:
+
+* Instant search
+* Category tabs (smooth scroll)
+
+---
+
+## 🛒 CART + CHECKOUT (CLEAN PREMIUM FLOW)
+
+1. CART UI:
+
+* Minimal + clean
+* Beige background
+* Green highlights
+
+2. CHECKOUT:
+
+* Multi-step feel:
+  Address → Review → Payment
+
+3. PAYMENT:
+
+* Razorpay integration (or mock)
+
+4. SUCCESS:
+
+* Show elegant success screen
+* "Thank you for dining with us 🌿"
+
+---
+
+## 👨‍🍳 ABOUT PAGE (STORY + BRANDING)
+
+1. ADD STORY:
+
+* Journey of Kalapi Restaurant
+* Focus on vegetarian excellence
+
+2. ADD SECTIONS:
+
+* Farm fresh ingredients 🌿
+* Culinary craftsmanship 👨‍🍳
+* Premium ambiance ✨
+
+3. ADD CTA:
+
+* "Book a Table"
+
+---
+
+## 📞 CONTACT PAGE (MAP + CLEAN UI)
+
+1. ADD GOOGLE MAP:
+
+* Embed Ahmedabad location
+
+2. ADD:
+
+* Click-to-call button
+* Contact form (store data)
+
+3. BUTTONS:
+
+* Call Now
+* Get Directions
+
+---
+
+## 🔻 FOOTER (MINIMAL)
+
+REMOVE unnecessary links
+
+KEEP:
+
+* Address
+* Phone
+* Social icons
+* Copyright
+
+---
+
+# ✨ UI / UX ENHANCEMENTS
+
+* Smooth scroll animations
+* Hover effects (scale + shadow)
+* Page transitions
+* Lazy loading images
+* Skeleton loaders
+* Sticky navbar with blur
+
+---
+
+# ⚙️ FUNCTIONAL REQUIREMENTS
+
+Every button MUST work:
+
+* Add to Cart → updates cart
+* Favorite ❤️ → saves item
+* Checkout → saves order
+* Payment → updates status
+* Contact form → saves data
+
+---
+
+# 📱 RESPONSIVE DESIGN
+
+* Mobile-first design
+* Tablet optimized
+* Desktop premium layout
+
+---
+
+# 🎯 FINAL OUTPUT:
+
+Generate:
+
+1. React + Tailwind frontend
+2. Working cart system
+3. Razorpay integration (mock-ready)
+4. Real food images
+5. Google Maps embed
+6. Premium UI redesign (earthy theme)
+7. Smooth animations
+8. Clean and scalable code structure
+
+---
+
+🎯 FINAL GOAL:
+
+Create a website that feels like:
+
+👉 A luxury vegetarian fine-dining brand
+👉 Natural, premium, and modern
+👉 NOT a template — fully custom experience
+
+🌿 Elegant. Organic. Premium.

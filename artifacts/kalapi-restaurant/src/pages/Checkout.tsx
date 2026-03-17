@@ -45,7 +45,7 @@ export default function Checkout() {
     if (!isAuthenticated) setLocation("/login");
   }, [isAuthenticated, setLocation]);
 
-  if (cartLoading) return <div className="pt-32 min-h-screen text-center">Loading...</div>;
+  if (cartLoading) return <div className="pt-40 min-h-screen text-center font-display text-2xl">Loading checkout...</div>;
   if (!cartItems?.length) {
     setLocation("/cart");
     return null;
@@ -68,86 +68,104 @@ export default function Checkout() {
   };
 
   return (
-    <div className="pt-32 pb-24 min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <h1 className="font-display text-4xl text-gold-gradient mb-10 text-center">Secure Checkout</h1>
+    <div className="pt-40 pb-32 min-h-screen bg-background">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <h1 className="font-display text-5xl text-foreground mb-16 text-center">Secure Checkout</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-            <div className="glass-panel p-8 rounded-xl">
-              <h2 className="text-xl font-display mb-6 border-b border-white/10 pb-2">Delivery Details</h2>
-              <form id="checkout-form" onSubmit={handleSubmit} className="space-y-5">
+            <div className="bg-card p-10 rounded-2xl soft-shadow">
+              <h2 className="text-3xl font-display mb-8 text-foreground border-b border-border pb-4">Delivery Details</h2>
+              <form id="checkout-form" onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-1">Full Name *</label>
+                  <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Full Name *</label>
                   <input 
                     type="text" required
                     value={form.deliveryName}
                     onChange={e => setForm({...form, deliveryName: e.target.value})}
-                    className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary"
+                    className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-1">Phone Number *</label>
+                  <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Phone Number *</label>
                   <input 
                     type="tel" required
                     value={form.deliveryPhone}
                     onChange={e => setForm({...form, deliveryPhone: e.target.value})}
-                    className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary"
+                    className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-1">Complete Address *</label>
+                  <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Complete Address *</label>
                   <textarea 
                     required rows={3}
                     value={form.deliveryAddress}
                     onChange={e => setForm({...form, deliveryAddress: e.target.value})}
-                    className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary"
+                    className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner resize-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm text-muted-foreground mb-1">Pincode</label>
-                  <input 
-                    type="text" 
-                    value={form.deliveryPincode}
-                    onChange={e => setForm({...form, deliveryPincode: e.target.value})}
-                    className="w-full bg-black/50 border border-white/10 rounded-md py-3 px-4 focus:outline-none focus:border-primary"
-                  />
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Pincode</label>
+                    <input 
+                      type="text" 
+                      value={form.deliveryPincode}
+                      onChange={e => setForm({...form, deliveryPincode: e.target.value})}
+                      className="w-full bg-background border border-border rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold tracking-wide text-foreground mb-2 uppercase">Coupon Code</label>
+                    <input 
+                      type="text" 
+                      placeholder="Optional"
+                      className="w-full bg-transparent border-2 border-primary/30 border-dashed rounded-lg py-4 px-5 text-foreground focus:outline-none focus:border-primary transition-all"
+                    />
+                  </div>
                 </div>
               </form>
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-            <div className="glass-panel p-8 rounded-xl sticky top-32">
-              <h2 className="text-xl font-display mb-6 border-b border-white/10 pb-2">Order Summary</h2>
-              <div className="space-y-4 mb-6 max-h-60 overflow-y-auto pr-2">
+            <div className="bg-card p-10 rounded-2xl sticky top-32 soft-shadow">
+              <h2 className="text-3xl font-display mb-8 text-foreground border-b border-border pb-4">Order Summary</h2>
+              
+              <div className="space-y-5 mb-8 max-h-80 overflow-y-auto pr-4 custom-scrollbar">
                 {cartItems.map(item => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span className="text-foreground/80">{item.quantity}x {item.menuItem?.name}</span>
-                    <span className="font-medium">₹{(item.quantity * (item.menuItem?.price || 0)).toFixed(2)}</span>
+                  <div key={item.id} className="flex justify-between items-center bg-background p-4 rounded-xl shadow-sm">
+                    <div className="flex items-center gap-4">
+                      <span className="bg-muted text-muted-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                        {item.quantity}
+                      </span>
+                      <span className="font-medium text-foreground">{item.menuItem?.name}</span>
+                    </div>
+                    <span className="font-bold text-primary">₹{(item.quantity * (item.menuItem?.price || 0)).toFixed(2)}</span>
                   </div>
                 ))}
               </div>
               
-              <div className="border-t border-white/10 pt-4 space-y-2 mb-8">
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Subtotal</span>
-                  <span>₹{subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Taxes (5%)</span>
-                  <span>₹{(subtotal * 0.05).toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-xl font-bold text-primary mt-2 pt-2 border-t border-white/5">
-                  <span>Total Payable</span>
-                  <span>₹{total.toFixed(2)}</span>
+              <div className="bg-background p-6 rounded-xl shadow-inner mb-8">
+                <div className="space-y-3">
+                  <div className="flex justify-between text-base text-muted-foreground">
+                    <span>Subtotal</span>
+                    <span className="font-medium text-foreground">₹{subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-base text-muted-foreground">
+                    <span>Taxes (5% GST)</span>
+                    <span className="font-medium text-foreground">₹{(subtotal * 0.05).toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-2xl font-display font-bold text-foreground pt-4 mt-2 border-t border-border">
+                    <span>Total Payable</span>
+                    <span className="text-primary">₹{total.toFixed(2)}</span>
+                  </div>
                 </div>
               </div>
 
               <button 
                 type="submit" form="checkout-form"
                 disabled={placeOrderMutation.isPending}
-                className="w-full py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest rounded-sm hover:bg-primary/90 transition-all disabled:opacity-50"
+                className="w-full py-5 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-lg rounded-lg hover:bg-[#A8522E] transition-all shadow-lg hover:-translate-y-1 disabled:opacity-50 disabled:hover:translate-y-0"
               >
                 {placeOrderMutation.isPending ? "Processing..." : "Place Order"}
               </button>
