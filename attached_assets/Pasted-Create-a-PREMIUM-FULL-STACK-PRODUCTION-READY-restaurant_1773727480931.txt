@@ -1,0 +1,358 @@
+Create a PREMIUM, FULL-STACK, PRODUCTION-READY restaurant web application for:
+
+Restaurant Name: Kalapi Restaurant  
+Type: Premium Vegetarian Multi-Cuisine Fine Dining Restaurant
+
+---
+
+🎯 CORE OBJECTIVE:
+
+Build a COMPLETE Swiggy/Zomato-level restaurant platform with:
+
+Frontend (Luxury UI) + Backend (APIs) + Database + Admin Panel
+
+Where users can:
+- Explore menu
+- Search & filter dishes
+- Signup/Login securely
+- Add to cart
+- Save favorites ❤️
+- Place orders
+- Make payments
+- Track orders
+- Save multiple addresses
+
+Admin can:
+- Manage menu
+- Manage orders
+- Manage users
+
+---
+
+🧠 TECH STACK:
+
+Frontend:
+- React.js + Tailwind CSS
+- Fully responsive (mobile-first)
+- Component-based architecture
+
+Backend:
+- Node.js + Express.js
+
+Database:
+- MongoDB
+
+Authentication:
+- JWT-based authentication
+- Password hashing (bcrypt)
+
+Payment:
+- Razorpay (integration-ready or mock)
+
+---
+
+🎨 DESIGN SYSTEM:
+
+- Theme: Dark Premium (Black + Gold + Warm tones)
+- UI Style:
+  - Glassmorphism
+  - Card-based layout
+  - Smooth animations
+  - Elegant typography
+- UX Inspired by:
+  - Swiggy / Zomato / Fine-dining websites
+
+---
+
+📄 COMPLETE PAGE STRUCTURE:
+
+1. Home Page  
+2. Menu Page  
+3. Order Online Page  
+4. Checkout Page  
+5. About Page  
+6. Contact Page  
+7. Login / Signup  
+8. User Dashboard  
+9. Admin Dashboard  
+10. Order Success Page  
+
+---
+
+🏠 HOME PAGE:
+
+Sections:
+- Hero Section:
+  "A Royal Vegetarian Dining Experience in Ahmedabad"
+  Buttons:
+    [View Menu] → Menu Page  
+    [Order Now] → Order Page  
+
+- Featured Dishes Carousel:
+  - Stuffed Pasta
+  - Charcoal Pizza
+  - Chocolate Explosion
+  - Dal Makhani
+
+- Reviews Section:
+  Rating: 4.3 ⭐
+  Bar Graph UI
+
+- Popular Times Graph (Google-style UI)
+
+- CTA Sections
+
+---
+
+📜 MENU PAGE (VERY IMPORTANT):
+
+- Dynamic menu from backend
+- Categories:
+  - Starters, Soups, Main Course, Biryani, Combos, Mini Meals
+  - Pizza & Pasta, Rice & Dal, Breads, Beverages
+
+Each item card MUST include:
+- Image
+- Name
+- Description
+- Price
+- Veg badge 🌱
+- Quantity selector (+ / -)
+- ❤️ Favorite button
+- 🛒 Add to Cart button
+
+---
+
+👉 BUTTON FUNCTIONALITY (CRITICAL):
+
+Add to Cart:
+- Add item to DB/cart state
+- Update navbar cart count
+- Show toast notification
+
+Favorite ❤️:
+- Save to user wishlist (DB)
+
+Search:
+- Real-time filtering
+
+Category Filter:
+- Dynamic filtering
+
+---
+
+🛒 CART & ORDER PAGE:
+
+Features:
+- Increase / Decrease quantity
+- Remove item
+- Total price calculation
+- Proceed to Checkout button
+
+---
+
+💳 CHECKOUT PAGE:
+
+Fields:
+- Name
+- Phone
+- Address
+- Pincode
+
+Buttons:
+
+[Apply Coupon]
+- Discount logic
+
+[Place Order]
+- Save order in DB
+- Generate Order ID
+- Redirect to payment
+
+---
+
+💰 PAYMENT:
+
+- Razorpay integration (or mock)
+
+On success:
+- Update paymentStatus = "Paid"
+- Redirect to Order Success Page
+
+---
+
+📦 ORDER TRACKING:
+
+User Dashboard:
+- Order history
+- Status tracking:
+  - Pending
+  - Preparing
+  - Out for Delivery
+  - Delivered
+
+---
+
+🔐 AUTH SYSTEM:
+
+Signup:
+- Name, Email, Password
+- Hash password (bcrypt)
+- Store in DB
+
+Login:
+- Validate user
+- Generate JWT token
+
+Logout:
+- Clear token
+
+---
+
+👤 USER DASHBOARD:
+
+- View Orders
+- Manage Addresses
+- Wishlist ❤️
+- Profile
+
+---
+
+🛠 ADMIN PANEL:
+
+Admin Features:
+
+Menu:
+- Add Item
+- Edit Item
+- Delete Item
+
+Orders:
+- View all orders
+- Update order status
+
+Users:
+- View users
+
+---
+
+📞 CONTACT PAGE:
+
+- Google Map Embed
+- Phone Click-to-call
+- Contact Form → Save in DB
+- Opening Hours
+- Buttons:
+  [Call Now]
+  [Get Directions]
+  [Book Table]
+
+---
+
+🗄 DATABASE STRUCTURE:
+
+Users:
+- name
+- email
+- password
+- addresses[]
+- wishlist[]
+
+Menu:
+- name
+- category
+- price
+- description
+- image
+
+Orders:
+- userId
+- items[]
+- total
+- status
+- address
+- paymentStatus
+
+Contacts:
+- name
+- email
+- message
+
+---
+
+⚙️ BACKEND API STRUCTURE:
+
+Auth:
+- POST /api/signup
+- POST /api/login
+
+Menu:
+- GET /api/menu
+- POST /api/menu (admin)
+- PUT /api/menu/:id
+- DELETE /api/menu/:id
+
+Cart:
+- POST /api/cart
+- GET /api/cart
+
+Orders:
+- POST /api/order
+- GET /api/orders (user)
+- GET /api/admin/orders
+
+User:
+- GET /api/user
+- PUT /api/user
+
+Contact:
+- POST /api/contact
+
+---
+
+🎁 EXTRA FEATURES:
+
+- Sticky Navbar (scroll effect)
+- Footer with social links
+- Loading animations
+- Smooth page transitions
+- Wishlist ❤️ system
+- Toast notifications
+- SEO optimized
+- Fast loading
+- Mobile optimized
+
+---
+
+🎯 FINAL OUTPUT REQUIRED:
+
+Generate:
+
+1. Full Frontend (React + Tailwind)
+2. Backend Server (Node + Express)
+3. MongoDB Models (Schemas)
+4. API Routes (All endpoints working)
+5. JWT Authentication System
+6. Cart + Order Logic
+7. Razorpay Integration (mock-ready)
+8. Admin Dashboard
+9. Fully functional buttons (ALL must work)
+10. Clean, scalable folder structure
+
+---
+
+⚡ IMPORTANT:
+
+- Every button MUST work (no static UI)
+- Must connect frontend ↔ backend
+- Must update UI dynamically
+- Code must be clean, modular, production-ready
+
+---
+
+🎨 FINAL GOAL:
+
+Create a **luxury, high-end, real-world restaurant platform**
+that looks and feels like:
+
+👉 Swiggy + Zomato + Premium Fine Dining Website combined

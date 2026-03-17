@@ -1,0 +1,33 @@
+packages:
+  "framer-motion": "For premium smooth page transitions and scroll reveals"
+  "recharts": "For the popular times graph and admin dashboard analytics"
+  "date-fns": "For readable date formatting in orders and dashboard"
+  "clsx": "Utility for conditionally joining classNames"
+  "tailwind-merge": "Utility for merging tailwind classes safely"
+
+images:
+  - path: "artifacts/kalapi-restaurant/public/images/hero-bg.png"
+    description: "Extremely luxurious and moody dark restaurant interior, warm candlelight, fine dining table setup with gold accents, deep shadows, cinematic lighting, ultra high resolution"
+    aspect_ratio: "16:9"
+  - path: "artifacts/kalapi-restaurant/public/images/logo.png"
+    description: "Minimalist luxury restaurant logo featuring the letter K and a subtle peacock feather motif, metallic gold color on pure black background, elegant, vector style"
+    aspect_ratio: "1:1"
+  - path: "artifacts/kalapi-restaurant/public/images/dish-pasta.png"
+    description: "Gourmet stuffed pasta plated elegantly on a dark ceramic plate, drizzled with truffle oil and micro greens, moody dramatic lighting, food photography"
+    aspect_ratio: "1:1"
+  - path: "artifacts/kalapi-restaurant/public/images/dish-pizza.png"
+    description: "Artisan charcoal crust pizza with vibrant vegetarian toppings, burrata cheese, golden lighting, rustic luxury food photography"
+    aspect_ratio: "1:1"
+  - path: "artifacts/kalapi-restaurant/public/images/dish-dessert.png"
+    description: "Chocolate explosion dessert with gold leaf flakes and a molten center, dark moody background, high-end fine dining dessert plating"
+    aspect_ratio: "1:1"
+  - path: "artifacts/kalapi-restaurant/public/images/dish-dal.png"
+    description: "Rich creamy Dal Makhani in a heavy brass bowl, garnished with a swirl of fresh cream and coriander, authentic luxury Indian cuisine, dramatic lighting"
+    aspect_ratio: "1:1"
+  - path: "artifacts/kalapi-restaurant/public/images/ambiance.png"
+    description: "Intimate and luxurious fine dining seating area, velvet dark seating, modern gold chandeliers, warm glowing atmosphere"
+    aspect_ratio: "16:9"
+
+notes:
+  - "Using global fetch interceptor in App.tsx to automatically inject JWT token from localStorage into all /api/ requests."
+  - "Dark mode is forced natively via CSS root variables to guarantee the premium gold/dark aesthetic."

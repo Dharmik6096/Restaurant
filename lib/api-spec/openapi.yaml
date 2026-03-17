@@ -1,22 +1,34 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Kalapi Restaurant API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication
+  - name: menu
+    description: Menu items
+  - name: cart
+    description: Shopping cart
+  - name: orders
+    description: Orders
+  - name: user
+    description: User profile
+  - name: admin
+    description: Admin operations
+  - name: contact
+    description: Contact form
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,7 +36,517 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/signup:
+    post:
+      operationId: signup
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupRequest"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /menu:
+    get:
+      operationId: getMenu
+      tags: [menu]
+      summary: Get all menu items
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Menu items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MenuItem"
+    post:
+      operationId: createMenuItem
+      tags: [admin]
+      summary: Create a menu item (admin)
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMenuItemRequest"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuItem"
+
+  /menu/{id}:
+    put:
+      operationId: updateMenuItem
+      tags: [admin]
+      summary: Update a menu item (admin)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMenuItemRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MenuItem"
+    delete:
+      operationId: deleteMenuItem
+      tags: [admin]
+      summary: Delete a menu item (admin)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /cart:
+    get:
+      operationId: getCart
+      tags: [cart]
+      summary: Get user cart
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Cart items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CartItem"
+    post:
+      operationId: addToCart
+      tags: [cart]
+      summary: Add item to cart
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddToCartRequest"
+      responses:
+        "200":
+          description: Cart updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItem"
+    delete:
+      operationId: clearCart
+      tags: [cart]
+      summary: Clear cart
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Cart cleared
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /cart/{menuItemId}:
+    put:
+      operationId: updateCartItem
+      tags: [cart]
+      summary: Update cart item quantity
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: menuItemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCartItemRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItem"
+    delete:
+      operationId: removeFromCart
+      tags: [cart]
+      summary: Remove item from cart
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: menuItemId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /orders:
+    post:
+      operationId: placeOrder
+      tags: [orders]
+      summary: Place an order
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlaceOrderRequest"
+      responses:
+        "201":
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+    get:
+      operationId: getUserOrders
+      tags: [orders]
+      summary: Get user orders
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+
+  /orders/{id}/pay:
+    post:
+      operationId: processPayment
+      tags: [orders]
+      summary: Process payment for an order
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentRequest"
+      responses:
+        "200":
+          description: Payment processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  /admin/orders:
+    get:
+      operationId: getAllOrders
+      tags: [admin]
+      summary: Get all orders (admin)
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: All orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+
+  /admin/orders/{id}/status:
+    put:
+      operationId: updateOrderStatus
+      tags: [admin]
+      summary: Update order status (admin)
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOrderStatusRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+
+  /admin/users:
+    get:
+      operationId: getAllUsers
+      tags: [admin]
+      summary: Get all users (admin)
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Users list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserProfile"
+
+  /user/profile:
+    get:
+      operationId: getUserProfile
+      tags: [user]
+      summary: Get current user profile
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+    put:
+      operationId: updateUserProfile
+      tags: [user]
+      summary: Update user profile
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+
+  /user/wishlist:
+    get:
+      operationId: getWishlist
+      tags: [user]
+      summary: Get user wishlist
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Wishlist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MenuItem"
+    post:
+      operationId: toggleWishlist
+      tags: [user]
+      summary: Toggle wishlist item
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WishlistRequest"
+      responses:
+        "200":
+          description: Toggled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistResponse"
+
+  /user/addresses:
+    get:
+      operationId: getAddresses
+      tags: [user]
+      summary: Get user addresses
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Address"
+    post:
+      operationId: addAddress
+      tags: [user]
+      summary: Add address
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddressRequest"
+      responses:
+        "201":
+          description: Added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+
+  /user/addresses/{id}:
+    delete:
+      operationId: deleteAddress
+      tags: [user]
+      summary: Delete address
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactRequest"
+      responses:
+        "201":
+          description: Submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     HealthStatus:
       type: object
@@ -34,3 +556,360 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+
+    SignupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 6
+      required:
+        - name
+        - email
+        - password
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/UserProfile"
+      required:
+        - token
+        - user
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [user, admin]
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - email
+        - role
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        category:
+          type: string
+        image:
+          type: string
+        isVeg:
+          type: boolean
+        isAvailable:
+          type: boolean
+        isFeatured:
+          type: boolean
+        rating:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - price
+        - category
+        - isVeg
+        - isAvailable
+
+    CreateMenuItemRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        category:
+          type: string
+        image:
+          type: string
+        isVeg:
+          type: boolean
+        isAvailable:
+          type: boolean
+        isFeatured:
+          type: boolean
+      required:
+        - name
+        - price
+        - category
+        - isVeg
+
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        menuItemId:
+          type: integer
+        quantity:
+          type: integer
+        menuItem:
+          $ref: "#/components/schemas/MenuItem"
+      required:
+        - id
+        - menuItemId
+        - quantity
+
+    AddToCartRequest:
+      type: object
+      properties:
+        menuItemId:
+          type: integer
+        quantity:
+          type: integer
+      required:
+        - menuItemId
+        - quantity
+
+    UpdateCartItemRequest:
+      type: object
+      properties:
+        quantity:
+          type: integer
+      required:
+        - quantity
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        total:
+          type: number
+        status:
+          type: string
+          enum: [pending, preparing, out_for_delivery, delivered, cancelled]
+        paymentStatus:
+          type: string
+          enum: [unpaid, paid, failed]
+        paymentId:
+          type: string
+        deliveryAddress:
+          type: string
+        deliveryName:
+          type: string
+        deliveryPhone:
+          type: string
+        couponCode:
+          type: string
+        discount:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - userId
+        - total
+        - status
+        - paymentStatus
+
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        menuItemId:
+          type: integer
+        quantity:
+          type: integer
+        price:
+          type: number
+        menuItem:
+          $ref: "#/components/schemas/MenuItem"
+      required:
+        - id
+        - menuItemId
+        - quantity
+        - price
+
+    PlaceOrderRequest:
+      type: object
+      properties:
+        deliveryName:
+          type: string
+        deliveryPhone:
+          type: string
+        deliveryAddress:
+          type: string
+        deliveryPincode:
+          type: string
+        couponCode:
+          type: string
+      required:
+        - deliveryName
+        - deliveryPhone
+        - deliveryAddress
+
+    PaymentRequest:
+      type: object
+      properties:
+        razorpayPaymentId:
+          type: string
+        razorpayOrderId:
+          type: string
+        razorpaySignature:
+          type: string
+      required:
+        - razorpayPaymentId
+
+    UpdateOrderStatusRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, preparing, out_for_delivery, delivered, cancelled]
+      required:
+        - status
+
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        pincode:
+          type: string
+        isDefault:
+          type: boolean
+      required:
+        - id
+        - street
+        - city
+        - pincode
+
+    AddressRequest:
+      type: object
+      properties:
+        label:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        pincode:
+          type: string
+        isDefault:
+          type: boolean
+      required:
+        - street
+        - city
+        - pincode
+
+    WishlistRequest:
+      type: object
+      properties:
+        menuItemId:
+          type: integer
+      required:
+        - menuItemId
+
+    WishlistResponse:
+      type: object
+      properties:
+        added:
+          type: boolean
+        menuItemId:
+          type: integer
+      required:
+        - added
+        - menuItemId
+
+    ContactRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        message:
+          type: string
+        bookingDate:
+          type: string
+      required:
+        - name
+        - email
+        - message
