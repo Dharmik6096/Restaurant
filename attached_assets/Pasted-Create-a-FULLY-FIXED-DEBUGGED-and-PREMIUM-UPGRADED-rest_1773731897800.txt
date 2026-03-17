@@ -1,0 +1,192 @@
+Create a FULLY FIXED, DEBUGGED, and PREMIUM UPGRADED restaurant web application for:
+
+Restaurant Name: Kalapi Restaurant
+Type: Luxury Vegetarian Fine Dining Restaurant
+
+---
+
+🎯 OBJECTIVE:
+
+Fix ALL UI bugs, layout issues, and functionality errors
+AND upgrade the website into a **premium, production-ready restaurant platform**
+
+The website MUST:
+
+* Look like a real restaurant (NOT template)
+* Work like a real app (NO broken buttons)
+* Be fully responsive and polished
+
+---
+
+# 🚨 CRITICAL BUG FIXES (TOP PRIORITY)
+
+---
+
+## 🔝 HEADER / NAVBAR ISSUES
+
+❌ Problems:
+
+* Logo not visible properly
+* Menu items (Home, Menu, About, Contact) not visible clearly
+* Navbar text blending into background
+* "Book a Table" button not visible properly
+
+✅ Fix:
+
+1. Navbar must be:
+
+* Sticky
+* Fully visible on all backgrounds
+* Add background blur + dark/solid color on scroll
+
+2. Logo:
+
+* Replace with clean, high-contrast logo
+* Ensure visibility (light logo on dark background)
+
+3. Menu Links:
+
+* Increase contrast (white / beige text)
+* Add hover underline animation
+
+4. "Book a Table" Button:
+
+* Make it highly visible
+* Use solid accent color (terracotta/green)
+* Add padding + rounded style
+* Add hover effect
+
+---
+
+## 🏠 HOME PAGE UI FIX
+
+❌ Problems:
+
+* Hero overlay too bright → text not readable
+* Text clarity issue
+* Buttons not clearly visible
+
+✅ Fix:
+
+* Reduce white overlay opacity
+* Add dark gradient overlay on video
+* Improve text contrast
+* Center alignment properly
+* Add spacing between heading & buttons
+
+---
+
+## 📜 MENU PAGE (CRITICAL FUNCTION BUG)
+
+❌ Problems:
+
+* Add to Cart not working
+* Shows "Login First" even after login
+* Cart not updating
+
+✅ Fix (VERY IMPORTANT):
+
+1. AUTH FIX:
+
+* Ensure JWT token is stored correctly (localStorage)
+* On login → store token
+* On page reload → persist login state
+
+2. ADD TO CART FIX:
+
+* Send token in API headers:
+  Authorization: Bearer <token>
+
+* Backend must:
+
+  * Validate token
+  * Add item to user's cart
+
+3. FRONTEND FIX:
+
+* Check if user is logged in BEFORE API call
+* If logged in → DO NOT show "Login First"
+
+4. CART STATE:
+
+* Update UI immediately after adding item
+* Show toast: "Item added to cart"
+
+---
+
+## 🛒 CART & ORDER FLOW
+
+❌ Problems:
+
+* Items not reflecting properly
+* Flow feels broken
+
+✅ Fix:
+
+* Sync cart with backend
+* Add:
+
+  * Quantity update
+  * Remove item
+* Show total price dynamically
+
+---
+
+## 💳 PAYMENT FIX
+
+❌ Problem:
+
+* Payment not working correctly
+
+✅ Fix:
+
+* Proper Razorpay integration (or working mock)
+* After payment:
+  → Update order in DB
+  → Redirect to success page
+
+---
+
+## 📄 PAGE CONTENT ISSUE
+
+❌ Problem:
+
+* Pages feel empty / incomplete
+
+✅ Fix:
+
+* Add proper content sections:
+
+  * About → Story + Experience
+  * Menu → Full categories
+  * Home → Multiple sections
+
+---
+
+## 📝 FORM ISSUES
+
+❌ Problem:
+
+* Contact / Book table forms not working or missing fields
+
+✅ Fix:
+
+* Add working forms:
+
+  * Name
+  * Phone
+  * Date & Time (for booking)
+  * Message
+
+* Save data in backend
+
+---
+
+## 📞 CONTACT PAGE FIX
+
+❌ Problems:
+
+* Map missing
+* Location not shown
+
+✅ Fix:

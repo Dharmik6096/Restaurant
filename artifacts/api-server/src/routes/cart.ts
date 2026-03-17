@@ -25,6 +25,9 @@ router.get("/cart", requireAuth as any, async (req: AuthRequest, res) => {
 router.post("/cart", requireAuth as any, async (req: AuthRequest, res) => {
   try {
     const userId = req.userId!;
+    if (!req.body || typeof req.body !== "object") {
+      return res.status(400).json({ error: "Bad request", message: "Request body is required" });
+    }
     const { menuItemId, quantity } = req.body;
     const existing = await db.select().from(cartItemsTable).where(and(eq(cartItemsTable.userId, userId), eq(cartItemsTable.menuItemId, menuItemId))).limit(1);
     let item;

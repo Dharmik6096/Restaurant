@@ -49,6 +49,9 @@ router.get("/user/wishlist", requireAuth as any, async (req: AuthRequest, res) =
 
 router.post("/user/wishlist", requireAuth as any, async (req: AuthRequest, res) => {
   try {
+    if (!req.body || typeof req.body !== "object") {
+      return res.status(400).json({ error: "Bad request", message: "Request body is required" });
+    }
     const { menuItemId } = req.body;
     const existing = await db.select().from(wishlistTable).where(and(eq(wishlistTable.userId, req.userId!), eq(wishlistTable.menuItemId, menuItemId))).limit(1);
     if (existing.length > 0) {
